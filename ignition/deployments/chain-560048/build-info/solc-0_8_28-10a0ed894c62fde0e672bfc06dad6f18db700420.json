@@ -1,0 +1,39 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_28-10a0ed894c62fde0e672bfc06dad6f18db700420",
+  "solcVersion": "0.8.28",
+  "solcLongVersion": "0.8.28+commit.7893614a",
+  "userSourceNameMap": {
+    "contracts/HelloWorld.sol": "project/contracts/HelloWorld.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "cancun",
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode",
+            "evm.deployedBytecode",
+            "evm.methodIdentifiers",
+            "metadata"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/HelloWorld.sol": {
+        "content": "pragma solidity ^0.8.28;\n\ncontract HelloWorld {\n\n    string public mymsg = \"Hello World!\";\n    event MessageUpdated(string message);\n\n    function setMsg(string memory message) public {\n        require(bytes(message).length > 0, \"Message cannot be empty\");\n        mymsg = message;\n        emit MessageUpdated(mymsg);\n    }\n}"
+      }
+    }
+  }
+}

@@ -4,10 +4,7 @@ import hardhatToolboxViemPlugin from "@nomicfoundation/hardhat-toolbox-viem";
 import { configVariable } from "hardhat/config";
 
 const config: HardhatUserConfig = {
-  plugins: [
-      hardhatVerify,
-      hardhatToolboxViemPlugin
-      ],
+  plugins: [hardhatToolboxViemPlugin],
   solidity: {
     profiles: {
       default: {
@@ -52,9 +49,10 @@ const config: HardhatUserConfig = {
         enabled: true
       },
       blockscout: {
-          enabled: true,
+          enabled: false,
         },
     },
 };
+
 
 export default config;
