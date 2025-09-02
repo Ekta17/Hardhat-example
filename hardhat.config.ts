@@ -4,7 +4,10 @@ import hardhatToolboxViemPlugin from "@nomicfoundation/hardhat-toolbox-viem";
 import { configVariable } from "hardhat/config";
 
 const config: HardhatUserConfig = {
-  plugins: [hardhatToolboxViemPlugin],
+  plugins: [
+      hardhatVerify,
+      hardhatToolboxViemPlugin
+      ],
   solidity: {
     profiles: {
       default: {
@@ -36,7 +39,22 @@ const config: HardhatUserConfig = {
       url: configVariable("SEPOLIA_RPC_URL"),
       accounts: [configVariable("SEPOLIA_PRIVATE_KEY")],
     },
+    hoodi: {
+          type: "http",
+          chainType: "l1",
+          url: configVariable("HOODI_RPC_URL"),
+          accounts: [configVariable("HOODI_PRIVATE_KEY")],
+        },
   },
+  verify: {
+      etherscan: {
+        apiKey: "ETHERSCAN_API_KEY",
+        enabled: true
+      },
+      blockscout: {
+          enabled: true,
+        },
+    },
 };
 
 export default config;
