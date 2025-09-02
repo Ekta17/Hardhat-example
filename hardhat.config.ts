@@ -45,7 +45,7 @@ const config: HardhatUserConfig = {
   },
   verify: {
       etherscan: {
-        apiKey: "ETHERSCAN_API_KEY",
+        apiKey: configVariable("ETHERSCAN_API_KEY"),
         enabled: true
       },
       blockscout: {
