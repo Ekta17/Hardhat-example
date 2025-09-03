@@ -23,13 +23,13 @@ contract HelloWorldTest is Test {
     require(keccak256(bytes(helloWorld.mymsg())) != keccak256(bytes(oldMessage)), "Value should be changed");
   }
 
-  function setMsgRejectsEmptyString() public {
+  function testSetMsgRejectsEmptyString() public {
     bool success;
     (success,) = address(helloWorld).call(abi.encodeWithSignature("setMsg(string)", ""));
     require(!success, "setMsg should revert when message is empty");
   }
 
-  function setMsgAcceptsNonEmptyString() public {
+  function testSetMsgAcceptsNonEmptyString() public {
     helloWorld.setMsg("Non-empty");
     require(keccak256(bytes(helloWorld.mymsg())) == keccak256(bytes("Non-empty")), "setMsg should accept non-empty string");
   }

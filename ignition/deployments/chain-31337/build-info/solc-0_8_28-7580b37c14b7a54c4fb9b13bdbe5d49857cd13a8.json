@@ -1,0 +1,39 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_28-7580b37c14b7a54c4fb9b13bdbe5d49857cd13a8",
+  "solcVersion": "0.8.28",
+  "solcLongVersion": "0.8.28+commit.7893614a",
+  "userSourceNameMap": {
+    "contracts/ToDoList.sol": "project/contracts/ToDoList.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "cancun",
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode",
+            "evm.deployedBytecode",
+            "evm.methodIdentifiers",
+            "metadata"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/ToDoList.sol": {
+        "content": "// SPDX-License-Identifier: UNLICENSED\npragma solidity ^0.8.28;\n\ncontract ToDoList {\n    struct Task {\n        string text;\n        bool completed;\n    }\n\n    Task[] public tasks;\n\n    event TaskCreated(uint indexed taskId, string text);\n    event TaskCompleted(uint indexed taskId, bool completed);\n\n    function createTask(string memory text) public {\n        tasks.push(Task(text, false));\n        uint taskId = tasks.length - 1;\n        emit TaskCreated(taskId, text);\n    }\n\n    function toggleTaskCompleted(uint taskId) public {\n        require(taskId < tasks.length, \"toggleTaskCompleted: invalid taskId\");\n        tasks[taskId].completed = !tasks[taskId].completed;\n        emit TaskCompleted(taskId, tasks[taskId].completed);\n    }\n\n    function getTask(uint taskId) public view returns (string memory text, bool completed) {\n        require(taskId < tasks.length, \"getTask: invalid taskId\");\n        Task storage task = tasks[taskId];\n        return (task.text, task.completed);\n    }\n\n    function getTaskId(string memory text) public view returns (uint taskId) {\n        require(bytes(text).length > 0, \"getTaskId: text cannot be empty\");\n        for(uint i = 0; i < tasks.length; i++) {\n            if(keccak256(bytes(tasks[i].text)) == keccak256(bytes(text))) {\n                return i;\n            }\n        }\n        return type(uint).max; //task not found\n    }\n\n    function getTasksCount() public view returns (uint) {\n        return tasks.length;\n    }\n}"
+      }
+    }
+  }
+}
